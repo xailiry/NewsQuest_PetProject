@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}News Quest{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css+js/newsfeed/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>News Quest</h1>
+    </header>
+    <nav>
+        <a href="{% url 'newsfeed:base' %}">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+    <div class="container">
+        {% block content %}
+        <!-- Content will be injected here -->
+        {% endblock %}
+    </div>
+{#    <footer>#}
+{#        <p>© 2024 News Quest. All rights reserved.</p>#}
+{#    </footer>#}
+</body>
+</html>

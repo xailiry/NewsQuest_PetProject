@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css+js/siteauth/styles.css' %}">
+</head>
+<body>
+<div class="container">
+    <h2>Login</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div>
+<div>
+    <iframe frameborder="0" allow="clipboard-write" style="border:none;width:100%;height:210px;" width="100%"
+            height="210" src="https://music.yandex.ru/iframe/track/126519783/31443906">Слушайте <a
+            href='https://music.yandex.ru/album/31443906/track/126519783'>ОРВИ</a> — <a
+            href='https://music.yandex.ru/artist/17528482'>Baby Melo</a> на Яндекс Музыке
+    </iframe>
+</div>
+<script src="{% static 'css+js/siteauth/js/scripts.js' %}"></script>
+</body>
+</html>

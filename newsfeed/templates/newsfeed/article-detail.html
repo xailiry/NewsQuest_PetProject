@@ -1,0 +1,15 @@
+{% extends "newsfeed/base.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<div class="article-detail">
+    <h2>{{ article.title }}</h2>
+    <p class="article-meta">Published on {{ article.published_date }} by {{ article.author }}</p>
+    <img src="{{ article.preview_img.url }}" alt="{{ article.title }}">
+    <div class="article-content">
+        {{ article.content|safe }}
+    </div>
+    <a href="{% url 'newsfeed:base' %}" class="back-link">Back to Home</a>
+</div>
+{% endblock %}

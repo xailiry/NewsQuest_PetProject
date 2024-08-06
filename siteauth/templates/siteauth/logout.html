@@ -1,0 +1,28 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout Confirmation</title>
+    <link rel="stylesheet" href="{% static 'css+js/siteauth/logout.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Are you sure you want to log out?</h2>
+        <div class="button-group">
+            <form method="POST" action="{% url 'siteauth:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="confirm-button">Yes</button>
+            </form>
+            <button class="cancel-button" onclick="cancelLogout()">No</button>
+        </div>
+    </div>
+    <script>
+        const baseUrl = "{% url 'newsfeed:base' %}";
+    </script>
+    <script src="{% static 'css+js/siteauth/js/scripts.js' %}"></script>
+</body>
+</html>
