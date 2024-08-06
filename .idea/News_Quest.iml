@@ -23,7 +23,8 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../News_Quest\templates" />
+        <option value="$MODULE_DIR$/newsfeed/templates" />
+        <option value="$MODULE_DIR$/siteauth/templates" />
       </list>
     </option>
   </component>
