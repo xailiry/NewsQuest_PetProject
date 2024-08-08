@@ -2,14 +2,53 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css+js/newsfeed/likes.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="article-detail">
-    <h2>{{ article.title }}</h2>
-    <p class="article-meta">Published on {{ article.published_date }} by {{ article.author }}</p>
-    <img src="{{ article.preview_img.url }}" alt="{{ article.title }}">
-    <div class="article-content">
-        {{ article.content|safe }}
+    <div class="article-detail">
+        <h2>{{ article.title }}</h2>
+        <p class="article-meta">Published on {{ article.published_date }} by {{ article.author }}</p>
+        <img src="{{ article.preview_img.url }}" alt="{{ article.title }}">
+        <div class="article-content">
+            {{ article.content|safe }}
+        </div>
+        <button id="like-button" data-id="{{ article.id }}" class="like-button">
+            {% if post_is_liked %}
+                Unlike
+            {% else %}
+                Like
+            {% endif %}
+        </button>
+        <span id="like-count">{{ number_of_likes }} likes</span>
+        <a href="{% url 'newsfeed:base' %}" class="back-link">Back to Home</a>
     </div>
-    <a href="{% url 'newsfeed:base' %}" class="back-link">Back to Home</a>
-</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#like-button').click(function () {
+                var articleId = $(this).data('id');
+                $.ajax({
+                    url: '{% url "newsfeed:article-like" article.id %}',
+                    type: 'POST',
+                    data: {
+                        'article_id': articleId,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function (response) {
+                        $('#like-count').text(response.likes + ' likes');
+                        if (response.liked) {
+                            $('#like-button').text('Unlike');
+                        } else {
+                            $('#like-button').text('Like');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
